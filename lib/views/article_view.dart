@@ -1,6 +1,6 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+
 
 
 class ArticleView extends StatefulWidget {
@@ -13,47 +13,46 @@ class ArticleView extends StatefulWidget {
 }
 
 class _ArticleViewState extends State<ArticleView> {
-  final controller = WebViewController()
-  ..setJavaScriptMode(JavaScriptMode.disabled);
-  //..loadRequest (Uri.parse(postUrl));
-  final Completer<WebViewController> _controller = Completer<WebViewController>();
+  // final controller = WebViewController()
+  // ..setJavaScriptMode(JavaScriptMode.disabled);
+  // //..loadRequest (Uri.parse(postUrl));
+  // final Completer<WebViewController> _controller = Completer<WebViewController>();
+
+
+  late InAppWebViewController inAppWebViewController;
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Flutter",
-              style:
-              TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
-            ),
-            Text(
-              "News",
-              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w600),
+          children: const <Widget>[
+            Text("News", style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),),
+            Text("Cart", style: TextStyle(color: Colors.brown, fontWeight: FontWeight.w600),
             )
           ],
         ),
-        actions: <Widget>[
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-              child: Icon(Icons.share,))
-        ],
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
-      body: Container(
-        height: MediaQuery.of(context).size.height,
-        width: MediaQuery.of(context).size.width,
-        child: WebViewWidget( controller: controller,
-          // initialUrl:  widget.postUrl,
-          // onWebViewCreated: (WebViewController webViewController){
-          //   _controller.complete(webViewController);
-          //},
-        ),
-      ),
+      body: Stack(
+        children: [
+          InAppWebView(
+            initialUrlRequest: URLRequest(
+              url: Uri.parse(widget.postUrl)
+            ),
+            onWebViewCreated: (InAppWebViewController controller){
+              inAppWebViewController = controller;
+            },
+            onProgressChanged: (InAppWebViewController controller, int progress){
+              setState(() {
+              });
+            },
+          ),
+        ]
+      )
     );
   }
 }

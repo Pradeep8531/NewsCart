@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:newscartz/helper/news.dart';
 import 'package:newscartz/helper/widgets.dart';
@@ -36,29 +37,20 @@ class _CategoryNewsState extends State<CategoryNews> {
     return Scaffold(
       appBar: AppBar(
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              "Flutter",
-              style:
-              TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
-            ),
-            Text(
-              "News",
-              style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w600),
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: const <Widget>[
+            Text("News ", style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),),
+            Text("Cart", style: TextStyle(color: Colors.brown, fontWeight: FontWeight.w600),
             )
           ],
         ),
-        actions: <Widget>[
-          Opacity(
-            opacity: 0,
-            child: Container(
-                padding: EdgeInsets.symmetric(horizontal: 16),
-                child: Icon(Icons.share,)),
-          )
-        ],
         backgroundColor: Colors.transparent,
         elevation: 0.0,
+        actions: [
+          IconButton(onPressed: () async{
+            await FirebaseAuth.instance.signOut();
+          }, icon: Icon(Icons.login), color: Colors.black87,)
+        ],
       ),
       body: _loading ? Center(
         child: CircularProgressIndicator(),

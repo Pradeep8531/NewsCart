@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "913913512365",
+    "project_id": "red-height-345703",
+    "storage_bucket": "red-height-345703.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913913512365:android:631128b3b757a1cba3e124",
+        "android_client_info": {
+          "package_name": "newscartz.com.example.newscartz"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA_PLR9j98p7acDC_dNqv7I7zoWXXntdX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

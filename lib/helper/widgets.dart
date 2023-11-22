@@ -3,22 +3,16 @@ import 'package:newscartz/views/article_view.dart';
 
 Widget MyAppBar(){
   return AppBar(
-    title: Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          "Flutter",
-          style:
-          TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),
-        ),
-        Text(
-          "News",
-          style: TextStyle(color: Colors.blue, fontWeight: FontWeight.w600),
-        )
-      ],
-    ),
-    backgroundColor: Colors.transparent,
-    elevation: 0.0,
+  title: Row(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: const <Widget>[
+  Text("News ", style: TextStyle(color: Colors.black87, fontWeight: FontWeight.w600),),
+  Text("Cart", style: TextStyle(color: Colors.brown, fontWeight: FontWeight.w600),
+  )
+  ],
+  ),
+  backgroundColor: Colors.transparent,
+  elevation: 0.0,
   );
 }
 
