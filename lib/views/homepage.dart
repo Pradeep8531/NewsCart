@@ -7,6 +7,7 @@ import 'package:newscartz/models/categorie_model.dart';
 import 'package:newscartz/views/categorie_news.dart';
 import 'package:newscartz/views/categorylist.dart';
 import '../helper/news.dart';
+import 'Custom_News_Selection.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -36,6 +37,9 @@ class _HomePageState extends State<HomePage> {
 
       if(index == 1){
         Navigator.push(context, MaterialPageRoute(builder: (context) => categorylist()));
+      }
+      if(index == 2){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Custom_News_Selection()));
       }
     });
   }
@@ -125,12 +129,12 @@ class _HomePageState extends State<HomePage> {
             label: 'Categories',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.edit),
+            label: 'Custom',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.blue.shade500,
         onTap: _onItemTapped,
       ),
     );

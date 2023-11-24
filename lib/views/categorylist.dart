@@ -1,10 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:newscartz/views/Custom_News_Selection.dart';
 import 'package:newscartz/views/homepage.dart';
-
 import '../helper/data.dart';
 import '../models/categorie_model.dart';
 import 'categorie_news.dart';
+
+/// List of Categories Page Categories page
 
 
 class categorylist extends StatefulWidget {
@@ -26,6 +28,9 @@ class _categorylistState extends State<categorylist> {
       _selectedIndex = index;
       if(index == 0){
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
+      }
+      if(index == 2){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => Custom_News_Selection()));
       }
     });
   }
@@ -82,12 +87,12 @@ class _categorylistState extends State<categorylist> {
             label: 'Categories',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
+            icon: Icon(Icons.edit),
+            label: 'Custom',
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: Colors.blue.shade500,
         onTap: _onItemTapped,
       ),
     );

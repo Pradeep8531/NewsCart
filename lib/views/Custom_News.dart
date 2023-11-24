@@ -1,28 +1,27 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:newscartz/helper/news.dart';
-import 'package:newscartz/helper/widgets.dart';
-
-import 'Custom_News_Selection.dart';
+import '../helper/news.dart';
+import '../helper/widgets.dart';
+import 'categorylist.dart';
 import 'homepage.dart';
 
-///News Related to that category
+///Custom News View
 
-class CategoryNews extends StatefulWidget {
 
+class Custom_News_View extends StatefulWidget {
   final newsCategory;
-  CategoryNews({this.newsCategory});
+  final country;
+  const Custom_News_View({Key? key, this.newsCategory, this.country}) : super(key: key);
 
   @override
-  _CategoryNewsState createState() => _CategoryNewsState();
+  State<Custom_News_View> createState() => _Custom_News_ViewState();
 }
 
-class _CategoryNewsState extends State<CategoryNews> {
+class _Custom_News_ViewState extends State<Custom_News_View> {
+
   var newslist;
   bool _loading = true;
-  int _selectedIndex = 1;
-
-
+  int _selectedIndex = 2;
 
   @override
   void initState() {
@@ -37,14 +36,15 @@ class _CategoryNewsState extends State<CategoryNews> {
       if(index == 0){
         Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
       }
-      if(index == 2){
-        Navigator.push(context, MaterialPageRoute(builder: (context) => Custom_News_Selection()));
+      if(index == 1){
+        Navigator.push(context, MaterialPageRoute(builder: (context) => categorylist()));
       }
     });
   }
+
   void getNews() async {
-    NewsForCategorie news = NewsForCategorie();
-    await news.getNewsForCategory(widget.newsCategory);
+    NewsForCategorie_Country news = NewsForCategorie_Country();
+    await news.getNewsForCategory_Country(widget.country,widget.newsCategory);
     newslist = news.news;
     setState(() {
       _loading = false;
@@ -74,24 +74,37 @@ class _CategoryNewsState extends State<CategoryNews> {
       ),
       body: _loading ? Center(
         child: CircularProgressIndicator(),
-      ) : SingleChildScrollView(
-        child: Container(
-            child: Container(
-              margin: EdgeInsets.only(top: 16),
-              child: ListView.builder(
-                  itemCount: newslist.length,
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemBuilder: (context, index) {
-                    return NewsTile(
-                      imgUrl: newslist[index].urlToImage ?? "",
-                      title: newslist[index].title ?? "",
-                      desc: newslist[index].description ?? "",
-                      content: newslist[index].content ?? "",
-                      posturl: newslist[index].url ?? "",
-                    );
-                  }),
+      ) : newslist.isEmpty
+          ? Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.hourglass_empty_outlined, color: Colors.grey, size: 90, ),
+            Center(
+              child: Text(
+                'Sorry, No news available at the moment',
+                style: TextStyle(fontSize: 18,fontStyle: FontStyle.italic),
+              ),
             ),
+          ]
+      )
+          : SingleChildScrollView(
+        child: Container(
+          child: Container(
+            margin: EdgeInsets.only(top: 16),
+            child: ListView.builder(
+                itemCount: newslist.length,
+                shrinkWrap: true,
+                physics: ClampingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return NewsTile(
+                    imgUrl: newslist[index].urlToImage ?? "",
+                    title: newslist[index].title ?? "",
+                    desc: newslist[index].description ?? "",
+                    content: newslist[index].content ?? "",
+                    posturl: newslist[index].url ?? "",
+                  );
+                }),
+          ),
         ),
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -110,7 +123,7 @@ class _CategoryNewsState extends State<CategoryNews> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blue.shade500,
+        selectedItemColor: Colors.amber[800],
         onTap: _onItemTapped,
       ),
     );
