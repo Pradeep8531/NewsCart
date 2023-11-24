@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-# NewsCartz
-New Repo
-=======
-# newscartz
 
 A new Flutter project.
 
