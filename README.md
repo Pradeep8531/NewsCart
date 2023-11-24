@@ -39,5 +39,5 @@ Explore the world, stay informed, and enjoy a seamless news-reading experience w
 Provide instructions on how to install and run the app.
 
 ## Contribution
-I welcome contributions! If you'd like to contribute to the project, please follow our [contribution guidelines](CONTRIBUTING.md).
+I welcome contributions! If you'd like to contribute to the project.
 
