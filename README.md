@@ -1,7 +1,7 @@
 # Flutter News App
 
 <p align="center">
-  <img src="path/to/your/app/icon.png" alt="Flutter News App Logo" width="150">
+  <img src="NewsCart/android/app/src/main/res/mipmap-hdpi/ic_launcher.png" alt="Flutter News App Logo" width="150">
 </p>
 
 Welcome to the Flutter News App, your go-to application for staying informed about global events. Whether you're a news enthusiast or someone who wants to explore what's happening around the world, this Flutter-based app is designed with user-friendliness in mind.
