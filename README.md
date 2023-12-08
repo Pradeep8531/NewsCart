@@ -34,10 +34,3 @@ In the future, we plan to introduce features that cater to individual preference
 
 Explore the world, stay informed, and enjoy a seamless news-reading experience with the Flutter News App. Happy reading! 🌐📰
 
-## Installation
-
-Provide instructions on how to install and run the app.
-
-## Contribution
-I welcome contributions! If you'd like to contribute to the project.
-
