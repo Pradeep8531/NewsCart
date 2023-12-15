@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui';
+import 'package:google_sign_in/google_sign_in.dart';
+import '../views/homepage.dart';
+
 class signup extends StatefulWidget {
   final void Function()? onPressed;
   const signup({Key? key, this.onPressed}) : super(key: key);
@@ -44,6 +47,7 @@ class _signupState extends State<signup> {
       }
     }
   }
+
 
 
   @override
@@ -126,7 +130,14 @@ class _signupState extends State<signup> {
 
                         ],
                       ),
-
+                      Center(
+                        child:
+                        IconButton(
+                          icon: Icon(Icons.icecream),
+                          onPressed: (){
+                            signInwithGoodle();
+                          },)
+                      ),
                     ],
                   ),
                 ),
@@ -134,6 +145,24 @@ class _signupState extends State<signup> {
             ),
           ]),
     );
+  }
+  signInwithGoodle() async{
+    GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+    GoogleSignInAuthentication? googleAuth = await googleUser?.authentication;
+
+    AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: googleAuth?.accessToken,
+      idToken: googleAuth?.idToken,
+    );
+
+    UserCredential userCredential = await FirebaseAuth.instance.signInWithCredential(credential);
+    //print(userCredential.user?.displayName);
+    if(userCredential.user != null ){
+      Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => HomePage()
+      ));
+    }
   }
 }
 
